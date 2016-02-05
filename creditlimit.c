@@ -3,6 +3,7 @@
 
  #include <stdio.h>
  #include <stdlib.h>
+ #include <stdbool.h>
  #include <string.h>
 
  #define ACC_MAX 10   // maximum number of accounts
@@ -11,8 +12,6 @@
  typedef struct account {
    int    accnumber;
    double balance;
-   double charges;
-   double credit;
    double limit;
    double purchases[PCH_MAX];
    int    purchasecount;
@@ -22,7 +21,8 @@
  /* Local Functions */
 
  static int  menu(void);                     // diplays menu of choices
- //static bool mkacc(void);                    // make new account
+ static void mkacc(Account * ar);                    // make new account
+ static bool isFull(Account * ar);
  //static bool rmacc(void);                    // delete account
  //static bool mkpch();                        // make a purchase
  //static bool chkcdt();                       // check credit
@@ -35,13 +35,12 @@
  //static Account getAccount(int accnum);      // return an account instance
 
  int main(void) {
-   Account acc;
    Account accs[ACC_MAX];
    char choice;
 
    while((choice = menu()) != 'q') {
      switch(choice) {
-       case 'a' :     //mkacc();
+       case 'a' :     mkacc(accs);
          break;
        case 'b' :     //rmacc();
          break;
@@ -65,15 +64,15 @@
    puts("Bye! Have a beautiful time");
  }
 
- int menu(void) {
+ static int menu(void) {
    int ch;
 
-   puts("   Enter the letter corresponding to your choice:");
-   puts(" a) Create New Account        b) Delete Account");
-   puts(" c) Make Purchase             d) Get Available Credit");
-   puts(" e) Payoff Debt               f) Change Credit Limit");
-   puts(" g) List Info                 h) List Accounts");
-   puts(" i) List Purchases            q) QUIT!");
+   puts("\n     Enter the letter corresponding to your choice:\n");
+   puts("    a) Create New Account        b) Delete Account");
+   puts("    c) Make Purchase             d) Get Available Credit");
+   puts("    e) Payoff Debt               f) Change Credit Limit");
+   puts("    g) List Info                 h) List Accounts");
+   puts("    i) List Purchases            q) QUIT!\n");
 
    while((ch = getchar()) != EOF) {
      while(getchar() != '\n') {       // discard rest of line
@@ -92,4 +91,28 @@
      return ch;
    }
 
+ static void mkacc(Account * ar) {
+   Account temp;
+
+   if(isFull(ar)) {
+     puts("No memory for more accounts");
+   } else {
+     puts("Enter Account Number:");
+     scanf("%d\n", &temp.accnumber);
+     puts("Enter Balance:");
+     scanf("%lf\n", &temp.balance);
+     puts("Enter Credit Limit");
+     scanf("%lf\n", &temp.limit);
+     ar = &temp;
+   }
+
+ }
+
+ static bool isFull(Account * ar) {
+   if(sizeof(ar) >= ACC_MAX) {
+     return true;
+   } else {
+     return false;
+   }
+ }
 
