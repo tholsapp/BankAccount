@@ -1,5 +1,5 @@
 
- /* account.c -- account implementation */
+ /* account.c --  bank account implementation */
 
  #include <stdio.h>
  #include <stdbool.h>
@@ -29,29 +29,43 @@
    scanf("%lf", &temp.lim);
 
    *acnt = temp;
+
+   printf("\nAccount %d created.\n", temp.acntnum);
  }
 
  // make purchase
  void mk_pch(Account * acnt) {
    double purchase;
-
-   puts("Enter price of purchase");
-   scanf("%lf\n", &purchase);
-   if(purchase <= acnt->bal &&
+   if(acnt->acntnum > 0) {
+     puts("Enter price of purchase");
+     scanf("%lf", &purchase);
+     if(purchase <= acnt->bal &&
        purchase <= acnt->lim) {
+       acnt->bal -= purchase;
+     } else {
+       pmt_fail();
+     }
    } else {
-     pmt_fail();
+     puts("No Account Created!");
    }
  }
 
  // check account balance
- bool chk_bal(Account * acnt) {
-   return false;
+ void chk_bal(Account * acnt) {
+   if(acnt->acntnum > 0) {
+     printf("Account Balance:\t%.2lf\n", acnt->bal);
+   } else {
+     puts("No Account Created!");
+   }
  }
 
  // check credit limit
- bool chk_crdt(Account * acnt) {
-   return false;
+ void chk_crdt(Account * acnt) {
+   if(acnt->acntnum > 0) {
+     printf("Account Credit Limit:\t%.2lf\n", acnt->lim);
+   } else {
+     puts("No Account Created!");
+   }
  }
 
  // payment failed
