@@ -20,9 +20,10 @@
 
  /* Local Functions */
 
- static int  menu(void);                     // diplays menu of choices
- static void mkacc(Account * ar);                    // make new account
- static bool isFull(Account * ar);
+ static int  menu(void);                       // diplays menu of choices
+ static void mkacc(Account * array);              // make new account
+ static bool isFull(Account * array);             // tests if the array is full
+ static int  getsize(Account * array);              // returns size of array
  //static bool rmacc(void);                    // delete account
  //static bool mkpch();                        // make a purchase
  //static bool chkcdt();                       // check credit
@@ -36,11 +37,15 @@
 
  int main(void) {
    Account accs[ACC_MAX];
+   Account (*accsp)[ACC_MAX];
    char choice;
+   int count = 0;       // item count in accs[]
+
+   accsp = &accs;
 
    while((choice = menu()) != 'q') {
      switch(choice) {
-       case 'a' :     mkacc(accs);
+       case 'a' :     mkacc(* accsp);
          break;
        case 'b' :     //rmacc();
          break;
@@ -91,10 +96,10 @@
      return ch;
    }
 
- static void mkacc(Account * ar) {
+ static void mkacc(Account * array) {
    Account temp;
 
-   if(isFull(ar)) {
+   if(isFull(array)) {
      puts("No memory for more accounts");
    } else {
      puts("Enter Account Number:");
@@ -103,16 +108,17 @@
      scanf("%lf\n", &temp.balance);
      puts("Enter Credit Limit");
      scanf("%lf\n", &temp.limit);
-     ar = &temp;
-   }
 
+     array = &temp;
+     array++;
+   }
  }
 
- static bool isFull(Account * ar) {
-   if(sizeof(ar) >= ACC_MAX) {
-     return true;
-   } else {
+ static int getsize(Account * array) {
+     return -1;
+ }
+
+ static bool isFull(Account * array) {
      return false;
-   }
- }
+  }
 
