@@ -35,12 +35,12 @@
  //
  //
  //
- bool chk_bal(Account * acnt);
+ void chk_bal(Account * acnt);
 
  //
  //
  //
- bool chk_crdt(Account * acnt);
+void chk_crdt(Account * acnt);
 
  //
  //
