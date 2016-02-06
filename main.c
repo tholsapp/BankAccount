@@ -1,5 +1,5 @@
 
- /* bankaccount.c -- bank account simulation */
+ /* main.c -- bank account simulation */
 
  #include <stdio.h>
  #include <stdlib.h>
@@ -9,8 +9,8 @@
 
  /* Local Functions */
 
- static int  menu(void);                       // diplays menu of choices
-
+ static int  menu(void);                      // processes choice from user
+ static void menu_options(void);              // prints menu of choices
 
  int main(void) {
    Account *acnt;
@@ -22,7 +22,11 @@
          break;
        case 'b' :     ls_info(acnt);
          break;
-       case 'c' :     //mkpch();
+       case 'c' :     mk_pch(acnt);
+         break;
+       case 'd' :     chk_bal(acnt);
+         break;
+       case 'e' :     chk_crdt(acnt);
          break;
        default  : puts("Switching error");
      }
@@ -34,11 +38,7 @@
  static int menu(void) {
    int ch;
 
-   puts("\n     Enter the letter corresponding to your choice:\n");
-   puts("    a) Create New Account        b) List Information");
-   puts("    d) Delete Account            e) ");
-   puts("    f) ");
-   puts("    q) QUIT");
+   menu_options();
 
    while((ch = getchar()) != EOF) {
      while(getchar() != '\n') {       // discard rest of line
@@ -54,5 +54,13 @@
        ch = 'q';
      }
      return ch;
+ }
+
+ static void menu_options(void) {
+     puts("\n     Enter the letter corresponding to your choice:\n");
+     puts("    a) Create New Account        b) List Information");
+     puts("    c) Make Purchase             d) Check Balance");
+     puts("    e) Check Credit Limit");
+     puts("    q) QUIT");
  }
 
