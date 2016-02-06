@@ -30,25 +30,25 @@
  //
  //
  //
- bool mk_pch();
+ void mk_pch(Account * acnt);
 
  //
  //
  //
- bool chk_bal();
+ bool chk_bal(Account * acnt);
 
  //
  //
  //
- bool chk_crdt();
+ bool chk_crdt(Account * acnt);
 
  //
  //
  //
- void pmt_fail();
+ void pmt_fail(void);
 
  //
  //
  //
- void ls_info();
+ void ls_info(Account * acnt);
 
