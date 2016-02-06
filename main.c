@@ -1,9 +1,8 @@
 
- /* bankaccount.c -- checks credit of an account */
+ /* bankaccount.c -- bank account simulation */
 
  #include <stdio.h>
  #include <stdlib.h>
- #include <stdbool.h>
  #include <string.h>
  #include "account.h"
 
@@ -21,7 +20,7 @@
      switch(choice) {
        case 'a' :     mk_acnt(acnt);
          break;
-       case 'b' :     //rmacc();
+       case 'b' :     ls_info(acnt);
          break;
        case 'c' :     //mkpch();
          break;
@@ -36,11 +35,10 @@
    int ch;
 
    puts("\n     Enter the letter corresponding to your choice:\n");
-   puts("    a) Create New Account        b) Delete Account");
-   puts("    c) Make Purchase             d) Get Available Credit");
-   puts("    e) Payoff Debt               f) Change Credit Limit");
-   puts("    g) List Info                 h) List Accounts");
-   puts("    i) List Purchases            q) QUIT!\n");
+   puts("    a) Create New Account        b) List Information");
+   puts("    d) Delete Account            e) ");
+   puts("    f) ");
+   puts("    q) QUIT");
 
    while((ch = getchar()) != EOF) {
      while(getchar() != '\n') {       // discard rest of line
