@@ -2,7 +2,6 @@
  /* account.c --  bank account implementation */
 
  #include <stdio.h>
- #include <stdbool.h>
  #include "account.h"
 
 
@@ -20,7 +19,7 @@
  void mk_acnt(Account * acnt) {
    Account temp;
 
-   init_acnt(&temp);
+   //init_acnt(&temp);
    puts("Enter Account Number:");
    scanf("%d", &temp.acntnum);
    puts("Enter Account Balance:");
@@ -36,11 +35,11 @@
  // make purchase
  void mk_pch(Account * acnt) {
    double purchase;
+
    if(acnt->acntnum > 0) {
      puts("Enter price of purchase");
      scanf("%lf", &purchase);
-     if(purchase <= acnt->bal &&
-       purchase <= acnt->lim) {
+     if(purchase <= acnt->bal && purchase <= acnt->lim) {
        acnt->bal -= purchase;
      } else {
        pmt_fail();
@@ -73,7 +72,11 @@
    puts("Payment Failed!");
  }
 
- // list information about account
+ // lists information about account
  void ls_info(Account * acnt) {
+   if(acnt->acntnum > 0) {
    printf("Account Number: \t%d\nAccount Balance: \t$%.2lf\n", acnt->acntnum, acnt->bal);
+   } else {
+     puts("No Account Created!");
+   }
  }

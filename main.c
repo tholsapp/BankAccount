@@ -16,6 +16,7 @@
    Account *acnt;
    char choice;
 
+   init_acnt(acnt);
    while((choice = menu()) != 'q') {
      switch(choice) {
        case 'a' :     mk_acnt(acnt);
@@ -33,6 +34,7 @@
    }
 
    puts("Bye! Have a beautiful time");
+   return 0;
  }
 
  static int menu(void) {
