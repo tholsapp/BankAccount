@@ -17,38 +17,43 @@
 
  /* Prototypes */
 
- // condition:
- // precondition:
- // postcondition:
+ // operation:        initialize account
+ // precondition:     acnt points to an account
+ // postcondition:    account is initialized to being empty
  void init_acnt(Account * acnt);
 
- // condition:
- // precondition:
- // postcondition:
+ // operation:        create an annount
+ // precondition:     acnt points to an account
+ // postcondition:    account is created
  void mk_acnt(Account * acnt);
 
- // condition:
- // precondition:
- // postcondition:
+ // operation:        make a purchase
+ // precondition:     acnt points to an account
+ // postcondition:    if purchase is under credit limit and under
+ //                   current balance, then procede with transaction,
+ //                   otherwise deny transaction
  void mk_pch(Account * acnt);
 
- // condition:
- // precondition:
- // postcondition:
+ // operation:        checks current balance of an previously
+ //                   ititialized account
+ // precondition:     acnt points to an account
+ // postcondition:    prints current balance
  void chk_bal(Account * acnt);
 
- // condition:
- // precondition:
- // postcondition:
-void chk_crdt(Account * acnt);
+ // operation:        check current credit limit
+ // precondition:     acnt points to an account
+ // postcondition:    prints current credit limit
+ void chk_crdt(Account * acnt);
 
- // condition:
- // precondition:
- // postcondition:
+ // operation:        payment fail message
+ // precondition:     mk_pch() was called
+ // postcondition:    if payment fails, then print fail message,
+ //                   otherwise function is not called
  void pmt_fail(void);
 
- // condition:
- // precondition:
- // postcondition:
+ // operation:        prints information about a previously
+ //                   initialized account
+ // precondition:     acnt points to an account
+ // postcondition:    prints account information
  void ls_info(Account * acnt);
 
