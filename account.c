@@ -27,7 +27,7 @@
    puts("Enter Credit Limit:");
    scanf("%lf", &temp.lim);
 
-   while(getchar() != '\n');
+   while(getchar() != '\n');    // clear buffer
 
    *acnt = temp;
 
@@ -50,7 +50,7 @@
      puts("No Account Created!");
    }
 
-   while(getchar() != '\n');
+   while(getchar() != '\n');    // clear buffer
  }
 
  // check account balance
