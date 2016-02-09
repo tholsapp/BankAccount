@@ -5,7 +5,7 @@
  #include "account.h"
 
 
-/* Account Functions */
+ /* Account Functions */
 
 
  // initialize account
@@ -21,15 +21,17 @@
 
    //init_acnt(&temp);
    puts("Enter Account Number:");
-   scanf("%d", &temp.acntnum);
+   scanf(" %d", &temp.acntnum);
    puts("Enter Account Balance:");
-   scanf("%lf", &temp.bal);
+   scanf(" %lf", &temp.bal);
    puts("Enter Credit Limit:");
    scanf("%lf", &temp.lim);
 
+   while(getchar() != '\n');
+
    *acnt = temp;
 
-   printf("\nAccount %d created.\n", temp.acntnum);
+   printf("Account %d created.", temp.acntnum);
  }
 
  // make purchase
@@ -47,6 +49,8 @@
    } else {
      puts("No Account Created!");
    }
+
+   while(getchar() != '\n');
  }
 
  // check account balance
