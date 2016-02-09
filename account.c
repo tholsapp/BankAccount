@@ -19,15 +19,19 @@
  void mk_acnt(Account * acnt) {
    Account temp;
 
-   //init_acnt(&temp);
+   init_acnt(&temp);
+   puts("Enter First Name:");
+   scanf("%20s", temp.fname);
+   puts("Enter Last Name:");
+   scanf("%20s", temp.lname);
    puts("Enter Account Number:");
-   scanf(" %d", &temp.acntnum);
+   scanf("%d", &temp.acntnum);
    puts("Enter Account Balance:");
-   scanf(" %lf", &temp.bal);
+   scanf("%lf", &temp.bal);
    puts("Enter Credit Limit:");
    scanf("%lf", &temp.lim);
 
-   while(getchar() != '\n');    // clear buffer
+   //while(getchar() != '\n');    // clear buffer
 
    *acnt = temp;
 
@@ -50,7 +54,7 @@
      puts("No Account Created!");
    }
 
-   while(getchar() != '\n');    // clear buffer
+   //while(getchar() != '\n');    // clear buffer
  }
 
  // check account balance
@@ -79,7 +83,8 @@
  // lists information about account
  void ls_info(Account * acnt) {
    if(acnt->acntnum > 0) {
-   printf("Account Number: \t%d\nAccount Balance: \t$%.2lf\n", acnt->acntnum, acnt->bal);
+     printf("First Name: \t%s\tLast Name: \t%s\n", acnt->fname, acnt->lname);
+     printf("Account Number: \t%d\nAccount Balance: \t$%.2lf\n", acnt->acntnum, acnt->bal);
    } else {
      puts("No Account Created!");
    }

@@ -5,9 +5,12 @@
  #include <stdbool.h>
 
  #define PCH_MAX 25               // maximim number of purchase history
+ #define MAX_LEN 30               // maximun length of names
 
 
  typedef struct account {
+   char   fname[MAX_LEN];         // first name
+   char   lname[MAX_LEN];         // last name
    int    acntnum;                // account number
    double bal;                    // balance of account
    double lim;                    // credit limit, maximum amount per payment
