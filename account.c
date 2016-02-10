@@ -93,12 +93,15 @@
  // lists purchase history
  void ls_his(Account * acnt) {
    Purchase temp;
-
-   printf("Purchase History\n");
-   printf("    Account Number:\tTime:\tPurchase:\tAprroved:\n");
-   for(int i = 0; i < PCH_MAX; i++) {
-     temp = acnt->pchs[i];
-     printf("%d) %d\t%lf\t%lf\t%d\n", i+1, temp.acntnum, temp.tm, temp.amnt, temp.approved);
+   if(acnt->pc > 0) {
+     printf("Purchase History\n");
+     printf("    Account Number:\tTime:\tPurchase:\tAprroved:\n");
+     for(int i = 0; i < acnt->pc; i++) {
+       temp = acnt->pchs[i];
+       printf("%d) %d\t%.2lf\t%.2lf\t%d\n", i+1, temp.acntnum, temp.tm, temp.amnt, temp.approved);
+     }
+   } else {
+     printf("No purchases!\n");
    }
  }
 
