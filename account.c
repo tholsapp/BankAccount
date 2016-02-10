@@ -13,6 +13,7 @@
    acnt->acntnum = 0;
    acnt->bal     = 0;
    acnt->lim     = 0;
+   acnt->pc      = 0;
  }
 
  // make a new account
@@ -31,8 +32,6 @@
    puts("Enter Credit Limit:");
    scanf("%lf", &temp.lim);
 
-   //while(getchar() != '\n');    // clear buffer
-
    *acnt = temp;
 
    printf("Account %d created.", temp.acntnum);
@@ -47,15 +46,26 @@
      scanf("%lf", &purchase);
      if(purchase <= acnt->bal && purchase <= acnt->lim) {
        acnt->bal -= purchase;
+       add_pmt(acnt, purchase);
      } else {
        pmt_fail();
      }
    } else {
      puts("No Account Created!");
    }
-
-   //while(getchar() != '\n');    // clear buffer
  }
+
+ void add_pmt(Account * acnt, double prch) {
+   Purchase pch;
+   pch.acntnum = acnt->acntnum;
+   pch.tm = 1;
+   pch.amnt = prch;
+   pch.approved = true;
+   acnt->pchs[acnt->pc] = pch;
+   acnt->pc++;
+   printf("Item added to purchase history\n");
+ }
+
 
  // check account balance
  void chk_bal(Account * acnt) {
@@ -80,11 +90,24 @@
    puts("Payment Failed!");
  }
 
+ // lists purchase history
+ void ls_his(Account * acnt) {
+   Purchase temp;
+
+   printf("Purchase History\n");
+   printf("    Account Number:\tTime:\tPurchase:\tAprroved:\n");
+   for(int i = 0; i < PCH_MAX; i++) {
+     temp = acnt->pchs[i];
+     printf("%d) %d\t%lf\t%lf\t%d\n", i+1, temp.acntnum, temp.tm, temp.amnt, temp.approved);
+   }
+ }
+
  // lists information about account
  void ls_info(Account * acnt) {
    if(acnt->acntnum > 0) {
      printf("First Name: \t%s\tLast Name: \t%s\n", acnt->fname, acnt->lname);
      printf("Account Number: \t%d\nAccount Balance: \t$%.2lf\n", acnt->acntnum, acnt->bal);
+     ls_his(acnt);
    } else {
      puts("No Account Created!");
    }

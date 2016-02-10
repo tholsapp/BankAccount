@@ -4,9 +4,16 @@
  #include <stdio.h>
  #include <stdbool.h>
 
- #define PCH_MAX 25               // maximim number of purchase history
- #define MAX_LEN 30               // maximun length of names
+ #define PCH_MAX 10               // maximim number of purchase history
+ #define MAX_LEN 20               // maximun length of names
 
+
+ typedef struct purchase {
+   int acntnum;                   // acount number
+   double tm;                     // time
+   double amnt;                   // amount of transaction
+   bool approved;                 // returns true if transaction was approved
+ } Purchase;
 
  typedef struct account {
    char   fname[MAX_LEN];         // first name
@@ -14,9 +21,10 @@
    int    acntnum;                // account number
    double bal;                    // balance of account
    double lim;                    // credit limit, maximum amount per payment
-   double pchs[PCH_MAX];          // purchase history
-   int    pchc;                   // index for array pchs[]
+   Purchase pchs[PCH_MAX];        // purchase history
+   int    pc;                   // index for array pchs[]
  } Account;
+
 
  /* Prototypes */
 
@@ -37,6 +45,13 @@
  //                   otherwise deny transaction
  void mk_pch(Account * acnt);
 
+ // operation:        adds payment to array
+ // precondition:     acnt pints to an account
+ // postcondition:    if purchase is processed then the purchase is
+ //                   added to the array, otherwise the transaction
+ //                   has failed
+ void add_pmt(Account * acnt, double prch);
+
  // operation:        checks current balance of an previously
  //                   ititialized account
  // precondition:     acnt points to an account
@@ -53,6 +68,11 @@
  // postcondition:    if payment fails, then print fail message,
  //                   otherwise function is not called
  void pmt_fail(void);
+
+ // operation:        prints purchase history
+ // precondition:     acnt points to an account
+ // postcondition:    prints purchase history
+ void ls_his(Account * acnt);
 
  // operation:        prints information about a previously
  //                   initialized account
